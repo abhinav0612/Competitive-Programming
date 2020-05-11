@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int helper(int index, int size, vector<int> a, vector<bool> &vec, int infected){
+    if(index == size-1){
+        vec[index] = true;
+        return infected;
+    }
+    vec[index] = true;
+    if(a[index+1] - a[index] <= 2)
+        return helper(index+1,size,a,vec,infected+1);
+    else 
+        return infected;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int t,n;
+    cin>>t;
+    while(t--){
+        cin>>n;
+        int count = 0,x;
+        vector<int> a;
+        int maximum = 9999,minimum = 1;
+        for(int i=0;i<n;i++) 
+        {
+            cin>>x;
+           a.push_back(x);
+        }
+        vector<bool> vec(n,false);
+        for(int i=0;i<n;i++){
+            if(!vec[i]){
+                count = helper(i,n,a,vec,1);
+                maximum = min(count,maximum);
+                minimum = max(count,minimum);
+            }
+        }
+        cout<<maximum<<" "<<minimum<<"\n";
+    }
+    return 0;
+}
