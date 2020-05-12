@@ -1,0 +1,33 @@
+class BSTIterator {
+    vector<int> res;
+    int curr = -1;
+public:
+    BSTIterator(TreeNode* root) { 
+        inorder(root);
+    }
+    
+    /** @return the next smallest number */
+    int next() {
+       if(hasNext())
+       {
+           ++curr;
+           return res[curr];
+       }
+        return 0;
+    }
+    
+    /** @return whether we have a next smallest number */
+    bool hasNext() {
+        if(res.size()-1-curr > 0)
+            return true;
+        else
+            return false;
+    }
+    void inorder(TreeNode * root){ 
+        if(root == NULL)
+            return;
+        inorder(root->left);
+        res.push_back(root->val);
+        inorder(root->right);
+    }
+};
