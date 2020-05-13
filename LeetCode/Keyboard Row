@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<string> findWords(vector<string>& words) {
+    unordered_set<char> row1{'a','s','d','f','g','j','k','l','h'};
+    unordered_set<char> row2{'q','w','e','r','t','y','u','i','o','p'};
+    unordered_set<char> row3{'z','x','c','v','b','n','m'};
+    vector<string> res;
+    string str="";
+    char c;
+    int first,second,third,size,listSize;  
+        listSize = words.size();
+      for(int i =0; i< listSize;i++){
+          str = words[i];
+          size = str.size();
+          first = second = third = size;
+          for(int j = 0; j < size; j++){
+              c = tolower(str[j]);
+              if(row1.count(c) == 0)
+                first--;
+              if(row2.count(c) == 0)
+                  second--;
+              if(row3.count(c) == 0)
+                  third--;
+          }
+          if(first == size || second == size || third == size)
+              res.push_back(str);
+      }  
+      return res;  
+    }
+};
