@@ -14,7 +14,9 @@ public:
           size = str.size();
           first = second = third = size;
           for(int j = 0; j < size; j++){
-              c = tolower(str[j]);
+              c = str[j];
+              if( c < 'a')
+                  c = c+32;
               if(row1.count(c) == 0)
                 first--;
               if(row2.count(c) == 0)
