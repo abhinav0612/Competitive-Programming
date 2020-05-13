@@ -1,0 +1,43 @@
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        int size = s.size(),length =  t.size();
+        if(size!= length)
+            return false;
+        int arr[26]={0};
+        bool valid = true;
+        for(int i =0;i<size;i++)
+            arr[s[i]-'a']++;
+        for(int i =0;i<size;i++)
+            if(arr[t[i]-'a']>0)
+               arr[t[i]-'a']--;
+         for(int i =0;i<26;i++)
+            if(arr[i] == 0)
+               continue;
+            else{
+                valid = false;
+                break;
+            }
+        return valid;
+    }
+};
+More optimised solution:
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        int size = s.size(),length =  t.size();
+        if(size!= length)
+            return false;
+        int arr[26]={0};
+        for(int i =0;i<size;i++){
+            arr[s[i]-'a']++;
+            arr[t[i]-'a']--;
+        }
+         for(int i =0;i<26;i++){
+           if(arr[i] != 0)
+               return false;  
+         }
+        return true;
+    }
+};
