@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int numJewelsInStones(string J, string S) {
+        int jewelSize = J.size(),stoneSize = S.size(),count = 0;
+        char arr[128] ={0};
+        for(int i = 0; i < jewelSize;i++) arr[J[i]]++;
+        for(int i = 0; i < stoneSize;i++){
+            if(arr[S[i]] > 0)
+                count++;
+        }
+        return count;
+    }
+};
