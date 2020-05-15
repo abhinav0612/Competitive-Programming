@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        unordered_map<char,int> map;
+        int size = s.size(),res = 0,countEven = 0;
+        bool oddLenghtCharacterPresent = false;
+        for(int i = 0; i < size ;i++){
+            if(map[s[i]]>0)
+                map[s[i]]++;
+            else
+                map[s[i]] = 1;
+        }
+        for(auto it = map.begin(); it !=map.end(); it++){
+           if(it->second % 2 == 0){
+              res+=it->second;
+               countEven++;
+           } 
+            else{
+               res+=(it->second)-1;
+                oddLenghtCharacterPresent = true;
+            }
+                
+        }
+        if(map.size()==1)
+            return map.begin()->second;
+
+        if(oddLenghtCharacterPresent)
+            return ++res;
+        else
+            return res;
+    }
+};
