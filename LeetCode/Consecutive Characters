@@ -1,0 +1,47 @@
+class Solution {
+public:
+    int maxPower(string s) {
+        unordered_map<char,vector<int>> map;
+        int maximum = -1;
+        for(int i = 0;i<s.size()-1; i++){
+            vector<int> temp;
+            if(s[i]==s[i+1]){
+                if(map.count(s[i]) == 1 )
+                {
+                    if(s[i]==s[i-1]){
+                        temp = map[s[i]];
+                        int size = temp.size();
+                        temp[size-1]++;
+                        map[s[i]] = temp;
+                    }
+                    else{
+                        temp = map[s[i]];
+                        temp.push_back(2);
+                        map[s[i]] = temp;
+                    }
+                }
+                else{
+                    temp.push_back(2);
+                    map[s[i]] = temp;
+                }
+                    
+            }
+            
+        }
+        // for(auto it = map.begin();it != map.end();it++){
+        //     vector<int> temp = it->second;
+        //     for(auto it : temp)
+        //         cout<< it;
+        //     //maximum = max(maximum,*max_element(temp.begin(), temp.end() ) );
+        // }
+        
+        if(map.size()==0)
+            return 1;
+        for(auto it = map.begin();it != map.end();it++){
+            vector<int> temp = it->second;
+            maximum = max(maximum,*max_element(temp.begin(), temp.end() ) );
+        }
+
+        return maximum;
+    }
+};
