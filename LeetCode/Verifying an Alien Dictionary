@@ -1,0 +1,35 @@
+class Solution {
+public:
+    bool isAlienSorted(vector<string>& words, string order) {
+       unordered_map<char,int> map;
+        int index = 0;
+        for(char c : order){
+            map[c] = index;
+            index++;
+        }
+        for(int i = 0;i <words.size()-1;i++){
+            int temp = min(words[i].size(),words[i+1].size());
+            if( !check(words[i],words[i+1],map,0,temp) )
+                return false;
+        }
+        return true;
+    }
+public:
+    bool check(string a,string b,unordered_map<char,int> map,int k,int maximum){
+        if(k == maximum){
+            if(a.size()>b.size())
+                return false;
+            else
+                return true;
+        }
+            
+        if(map[a[k]] < map[b[k]])
+            return true;
+        else if(map[a[k]] > map[b[k]])
+            return false;
+        else
+        {
+            return check(a,b,map,k+1,maximum);
+        }
+    }
+};
